@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { Route, Switch } from "react-router-dom";
 import SearchBox from '../components/SearchBox'
 import SearchResults from './SearchResults'
 
@@ -23,6 +22,7 @@ class SearchContainer extends Component {
     }
 
     searchHandler = () => {
+        event.preventDefault()
         fetch(`http://localhost:3000/api/v1/search.json?query=${this.state.searchText}`)
         .then(res => res.json())
         .then(data => {
@@ -40,6 +40,10 @@ class SearchContainer extends Component {
                 this.setState({
                     savedGems: savedGems
                 })
+                this.props.removeAlert(true)
+                setTimeout(() =>{
+                    this.props.removeAlert(false)
+                }, 3000)
             }
         }
         else{
@@ -47,7 +51,10 @@ class SearchContainer extends Component {
             this.setState({
                 savedGems: savedGems
             })
-            window.alert("Gem Saved!")
+            this.props.addAlert(true)
+            setTimeout(() =>{
+                this.props.addAlert(false)
+            }, 3000)
         }
         
     }
@@ -58,7 +65,6 @@ class SearchContainer extends Component {
             <div className="SearchContainer">
                 <SearchBox searchText={this.state.searchText} changeHandler={this.changeHandler} searchHandler={this.searchHandler}/>
                 <SearchResults saveHandler={this.saveHandler} searchResults={this.state.searchResults} savedGems={this.state.savedGems}/>
-
             </div>
         )
     }

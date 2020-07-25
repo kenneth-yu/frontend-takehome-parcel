@@ -1,13 +1,15 @@
 import React, {Component} from 'react';
-import { Route, Switch } from "react-router-dom";
+import { Button, InputGroup, Form, Row} from 'react-bootstrap';
 
 class SearchBox extends Component {
     render(){
         return(
-            <div style={{display:"flex", flexDirection:"row", height: "50px", padding: "30px 15% 15px 15%"}}>
-                <input style={{flex: "1"}} type="text" id="searchTextBox" placeholder="Search Ruby Gems..." value={this.props.searchText} onChange={this.props.changeHandler}/>
-                <input type="button" id="searchButton" value="Search" onClick={this.props.searchHandler} />
-            </div>
+            <InputGroup className="mb-5 mt-5">
+                <Form.Control  id="searchTextBox" placeholder="Search Ruby Gems..." value={this.props.searchText} onChange={this.props.changeHandler} size="lg" type="text" />
+                <InputGroup.Append>
+                    <Button className="pl-4 pr-4" type="submit" variant="outline-primary" id="searchButton" onClick={this.props.searchHandler}>Search</Button>
+                </InputGroup.Append>
+            </InputGroup>
         )
     }
 }
