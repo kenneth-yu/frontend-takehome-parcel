@@ -8,7 +8,8 @@ class App extends Component {
 
     render(){
         return(
-            <div className="App">
+            <div className="App" style={{textAlign: "center"}}>
+                <h1 >Ruby Gem Searching App</h1>
                 <SearchContainer/>
             </div>
         )

@@ -13,7 +13,7 @@ class SearchContainer extends Component {
     state = { 
         searchText: "",
         searchResults: [],
-        savedGems: localStorage.getItem('savedGems') ? JSON.parse(localStorage.getItem('savedGems')) : []
+        savedGems: localStorage.getItem('savedGems') ? JSON.parse(localStorage.getItem('savedGems')) : {}
     }
 
     changeHandler = (event) => {
@@ -33,17 +33,9 @@ class SearchContainer extends Component {
     }
 
     saveHandler = (event, gemDetails) =>{ 
-        //get savedGems
-        //see if it is in gemDetails
-        //if it is remove it, if it isnt add it
-        let savedGems = [...this.state.savedGems]
-
-        if(savedGems.includes(gemDetails)){
-            savedGems = savedGems.filter((savedGem, index) => {
-                if(savedGem !== gemDetails){
-                    return savedGem
-                }
-            })
+        let savedGems = {...this.state.savedGems}
+        if(savedGems[gemDetails.name]){
+            delete savedGems[gemDetails.name]
             if(window.confirm("Are you sure you want to remove this gem?")){
                 this.setState({
                     savedGems: savedGems
@@ -51,7 +43,7 @@ class SearchContainer extends Component {
             }
         }
         else{
-            savedGems.push(gemDetails)
+            savedGems[gemDetails.name] = gemDetails
             this.setState({
                 savedGems: savedGems
             })
