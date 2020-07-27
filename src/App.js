@@ -21,11 +21,11 @@ class App extends Component {
     }
 
     addAlertBanner = () => {
-        return <Alert className="text-center" variant="success">Gem saved successfully!</Alert>
+        return <Alert className="text-center" variant="success" style={{ position: 'absolute', width: '100%', left: '0', top: '0' }}>Gem saved successfully!</Alert>
     }
 
     removeAlertBanner = () => {
-        return <Alert className="text-center" variant="danger">Gem removed successfully!</Alert>
+        return <Alert className="text-center" variant="danger" style={{ position: 'absolute', width: '100%', left: '0', top: '0' }}>Gem removed successfully!</Alert>
     }
 
 
@@ -35,7 +35,7 @@ class App extends Component {
                 {this.state.addAlert ? this.addAlertBanner() : null}
                 {this.state.removeAlert ? this.removeAlertBanner() : null}
                 <Container>
-                    <h1 className="mt-5 text-center">Ruby Gem Search Application</h1>
+                    <h1 className="text-center" style={{marginTop: '65px'}}>Ruby Gem Search Application</h1>
                     <SearchContainer addAlert={this.addAlert} removeAlert={this.removeAlert}/>
                 </Container>
             </div>

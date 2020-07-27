@@ -32,31 +32,39 @@ class SearchContainer extends Component {
         })
     }
 
-    saveHandler = (event, gemDetails) =>{ 
-        let savedGems = {...this.state.savedGems}
-        if(savedGems[gemDetails.name]){
-            delete savedGems[gemDetails.name]
-            if(window.confirm("Are you sure you want to remove this gem?")){
-                this.setState({
-                    savedGems: savedGems
-                })
-                this.props.removeAlert(true)
-                setTimeout(() =>{
-                    this.props.removeAlert(false)
-                }, 3000)
-            }
-        }
-        else{
-            savedGems[gemDetails.name] = gemDetails
+        
+    onSaveGem = (gemDetails, savedGems) => {
+        delete savedGems[gemDetails.name]
+        if(window.confirm("Are you sure you want to remove this gem?")){
             this.setState({
                 savedGems: savedGems
             })
-            this.props.addAlert(true)
+            this.props.removeAlert(true)
             setTimeout(() =>{
-                this.props.addAlert(false)
+                this.props.removeAlert(false)
             }, 3000)
         }
-        
+    }
+
+    onDeleteGem = (gemDetails, savedGems) => {
+        savedGems[gemDetails.name] = gemDetails
+        this.setState({
+            savedGems: savedGems
+        })
+        this.props.addAlert(true)
+        setTimeout(() =>{
+            this.props.addAlert(false)
+        }, 3000)
+    }
+
+    saveHandler = (event, gemDetails) =>{ 
+        let savedGems = {...this.state.savedGems}
+        if(savedGems[gemDetails.name]){
+            this.onSaveGem(gemDetails, savedGems)
+        }
+        else{
+            this.onDeleteGem(gemDetails, savedGems)
+        }
     }
 
 

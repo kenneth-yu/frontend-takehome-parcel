@@ -3,7 +3,6 @@ import ResultComponent from '../components/ResultComponent'
 import {Row, Col} from 'react-bootstrap';
 
 class SearchResults extends Component {
-    
     render(){
         let parsedResults = this.props.searchResults.filter(resultDetails => !this.props.savedGems[resultDetails.name])
         .map((resultDetails, index) => <ResultComponent key={index} resultDetails={resultDetails} saveHandler={this.props.saveHandler}/>)
