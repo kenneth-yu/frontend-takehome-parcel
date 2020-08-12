@@ -33,7 +33,7 @@ class SearchContainer extends Component {
     }
 
         
-    onSaveGem = (gemDetails, savedGems) => {
+    onDeleteGem = (gemDetails, savedGems) => {
         delete savedGems[gemDetails.name]
         if(window.confirm("Are you sure you want to remove this gem?")){
             this.setState({
@@ -46,7 +46,7 @@ class SearchContainer extends Component {
         }
     }
 
-    onDeleteGem = (gemDetails, savedGems) => {
+    onSaveGem = (gemDetails, savedGems) => {
         savedGems[gemDetails.name] = gemDetails
         this.setState({
             savedGems: savedGems
@@ -60,10 +60,10 @@ class SearchContainer extends Component {
     saveHandler = (event, gemDetails) =>{ 
         let savedGems = {...this.state.savedGems}
         if(savedGems[gemDetails.name]){
-            this.onSaveGem(gemDetails, savedGems)
+            this.onDeleteGem(gemDetails, savedGems)
         }
         else{
-            this.onDeleteGem(gemDetails, savedGems)
+            this.onSaveGem(gemDetails, savedGems)
         }
     }
 
